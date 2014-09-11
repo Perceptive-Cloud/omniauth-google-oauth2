@@ -35,7 +35,7 @@ module OmniAuth
         end
       end
 
-      uid { raw_info['sub'] || verified_email }
+      uid { raw_info['id'] || verified_email }
 
       info do
         prune!({

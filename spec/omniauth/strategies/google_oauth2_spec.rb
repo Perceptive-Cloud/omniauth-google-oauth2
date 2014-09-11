@@ -57,7 +57,7 @@ describe OmniAuth::Strategies::GoogleOauth2 do
   end
 
   describe "#authorize_options" do
-    [:access_type, :hd, :login_hint, :prompt, :scope, :state, :permitted_domains].each do |k|
+    [:access_type, :hd, :login_hint, :prompt, :scope, :state].each do |k|
       it "should support #{k}" do
         @options = {k => 'http://someval'}
         expect(subject.authorize_params[k.to_s]).to eq('http://someval')

@@ -11,7 +11,7 @@ module OmniAuth
 
       option :skip_friends, true
 
-      option :authorize_options, [:access_type, :hd, :login_hint, :prompt, :request_visible_actions, :scope, :state, :redirect_uri, :include_granted_scopes]
+      option :authorize_options, [:access_type, :hd, :login_hint, :prompt, :request_visible_actions, :scope, :state, :redirect_uri, :include_granted_scopes, :permitted_domains]
 
       option :client_options, {
         :site          => 'https://accounts.google.com',
@@ -59,7 +59,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('https://www.googleapis.com/plus/v1/people/me/openIdConnect').parsed
+        @raw_info ||= access_token.get('https://www.googleapis.com/oauth2/v2/userinfo').parsed
       end
 
       def raw_friend_info(id)

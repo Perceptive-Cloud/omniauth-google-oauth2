@@ -57,7 +57,7 @@ describe OmniAuth::Strategies::GoogleOauth2 do
   end
 
   describe "#authorize_options" do
-    [:access_type, :hd, :login_hint, :prompt, :scope, :state].each do |k|
+    [:access_type, :hd, :login_hint, :prompt, :scope, :state, :permitted_domains].each do |k|
       it "should support #{k}" do
         @options = {k => 'http://someval'}
         expect(subject.authorize_params[k.to_s]).to eq('http://someval')
@@ -267,6 +267,7 @@ describe OmniAuth::Strategies::GoogleOauth2 do
         builder.adapter :test do |stub|
           stub.get('/plus/v1/people/me/openIdConnect') {|env| [200, {'content-type' => 'application/json'}, '{"sub": "12345"}']}
           stub.get('/plus/v1/people/12345/people/visible') {|env| [200, {'content-type' => 'application/json'}, '[{"foo":"bar"}]']}
+          stub.get('/oauth2/v2/userinfo') {|env| [200, {'content-type' => 'application/json'}, '{"sub":"12345"}']}
         end
       end
     end
